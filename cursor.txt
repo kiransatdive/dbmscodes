@@ -1,0 +1,32 @@
+// Create two tables orollcall & nrollcall insert values in orollcall 
+// Syntax for cursor :-
+
+create procedure p33(in r1 int) 
+begin 
+declare r2 int; 
+declare exit_loop boolean; 
+declare c1 cursor for select rollno from orollcall where rollno>r1;                                                                                                                      
+declare continue handler for not found set exit_loop=true;
+open c1;
+exit_loop : loop
+fetch c1 into r2; 
+if not exists (select * from nrollcall where rollno=r2) 
+then 
+insert into nrollcall select * from orollcall where rollno=r2; 
+end if; 
+if exit_loop  
+then 
+close c1; 
+leave e_loop; 
+end if; 
+end loop e_loop; 
+end //                  
+Query OK, 0 rows affected (0.03 sec)
+
+// Syntax to call :-
+call p33(0);
+//
+
+//Check records in nrollcall table :- 
+select * from nrollcall;
+//

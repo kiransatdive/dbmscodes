@@ -1,0 +1,8 @@
+db.Student.aggregate([{"$group":{_id:"$class",count:{$sum:1}}}])
+db.Student.aggregate({$group:{"_id":"age","low":{"$min":"$age"},"high":{"$max":"$age"}}})
+db.Student.aggregate([{$match:{age:{$gt:20}}}])
+db.Student.aggregate({$sort:{age:1}})
+ index
+db.Student.createIndex({name:-1})
+db.Student.getIndexes()
+db.Student.find({age:18})

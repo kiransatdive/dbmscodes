@@ -1,0 +1,20 @@
+Q.5 Answers :---
+create table area(radius float, area float);
+     >delimiter $
+     > create procedure area2(in rad float)
+    -> begin
+    -> declare radiusBound condition for sqlstate '45000';
+    -> if (rad<5 || rad>9) then
+    -> signal sqlstate '45000' set message_text='radius is not between 5 & 9';
+    -> else
+    -> insert into area values(rad,3.14*rad*rad);
+    -> end if;
+    -> end
+    -> $
+// Call the area procedure :-
+call area(6);
+    -> $
+// Check the values inserted int the table :-
+select * from area;
+    -> $
+

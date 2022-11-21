@@ -1,0 +1,10 @@
+// create collection Patient(name,age,ID) insertMany values in it
+// create collection result
+// Syntax of mapReduce :-
+
+var map=function() {emit(this.Age, this.ID)};
+var reduce=funtion (Age, ID) {return Array.sum(ID); };
+db.Patient.mapReduce (map, reduce, {out: "resultCollection"});
+
+// Syntax to show mapReduce :-
+db.resultCollection.find()

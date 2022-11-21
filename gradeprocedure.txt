@@ -1,0 +1,21 @@
+delimiter //
+create procedure proc_grade(in marks int, out class char(10))
+begin
+if marks<=1500 and marks>=990 then set class=’DIST’;
+end if;
+if marks<=989 and marks>=900 then set class=’FC’;
+end if;
+if marks<=899 and marks>=825 then set class=’HSC’;
+end if;
+end;
+//
+
+create function find_result(roll_in int) returns int deterministic
+begin
+declare fmarks int;
+declare grade char(10);
+declare stud_name char(10);
+select stud_marks.total_marks,stud_marks.name into fmarks, stud_name from stud_marks where stud_marks.roll_no=roll_in;
+call proc_grade(fmarks,@grade);
+insert into result values(roll_in,stud_name, @grade);
+return roll_in; end;//

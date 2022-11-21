@@ -1,0 +1,5 @@
+db.createCollection('student')
+db.student.insert({Name: 'sattu', Class: 'te-b', address : 'daund', age: '19', fees : '1492'})
+db.student.find().pretty()
+db.student.update({address:'nandurbar'}, {$set : { address: 'nagar'}})
+db.student.remove({Name : 'sattu'})

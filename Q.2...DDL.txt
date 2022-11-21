@@ -1,0 +1,11 @@
+Q2b Answer :---DDL
+1)	SELECT DISTINCT salesman id  FROM orders;
+2)	SELECT name,city FROM salesman WHERE city='Paris';
+3)	SELECT * FROM customer WHERE grade = 200;
+4)	SELECT ord_no, ord_date, purch_amt  FROM orders  WHERE salesman_id = 5001;
+5)	SELECT * FROM customer  WHERE cust name LIKE '%n';
+6)
+7)
+8)  SELECT SUM (purch_amt)   FROM orders; 
+9) SELECT customer_id, ord_date, MAX(purch_amt) FROM orders GROUP BY customer id, ord date;
+10) SELECT *  FROM customer  WHERE city = 'New York' OR NOT grade > 100;

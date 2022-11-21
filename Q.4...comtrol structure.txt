@@ -1,0 +1,34 @@
+Q.4 Answers :---
+// Create two tables borrower(rollin, name, nameofbook, dateofissue, status) &  fine(rollno, returndate, amount), insert values in borrower
+// Syntax for procedure :-
+
+> delimiter $ 
+> create procedure p0(in roll int)
+-> begin                                                                                                          
+-> declare fine1 int;                                                                                             
+-> declare noofdays int;                                                                                          
+-> declare issuedate date;                                                                                        
+-> declare exit handler for SQLEXCEPTION select 'create table defintion';                                         
+-> select date_of_issue into issuedate from borrower where rollin=roll;                                           
+-> select datediff(curdate(),issuedate) into noofdays;                                                            
+-> if noofdays>15 and noofdays<=30 then                                                                          
+-> set fine1=noofdays*5;                                                                           
+-> insert into fine values(roll,curdate(),fine1);                                                                 
+-> elseif noofdays>30 then                                                                                        
+-> set fine1=((noofdays-30)*50)+15*5;                                                                             
+-> insert into fine values(roll,curdate(),fine1);                                                                 
+-> else                                                                                                           
+-> insert into fine values(rol,curdate(),0);                                                                      
+-> end if;                                                                                                        
+-> update borrower set status='return' where rollin=roll;                                                         
+-> end $                                                                                                      
+Query OK, 0 rows affected (0.04 sec)
+
+// To call the procedure :-
+-> call p0(3);
+-> $
+
+// Check values in borrower & fine table :-
+select * from borrower; $
+select * from fine; $
+
